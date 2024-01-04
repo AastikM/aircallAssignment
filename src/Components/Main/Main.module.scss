@@ -1,0 +1,14 @@
+.mainContainer {
+  display: flex;
+  justify-content: space-around;
+}
+.mainContainerTabButton {
+  padding: 10px;
+  cursor: pointer;
+}
+.mainContainerTabActive {
+  border-bottom: 2px solid black;
+}
+.MainContent{
+  margin-top: 20px;
+}

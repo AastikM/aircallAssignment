@@ -1,0 +1,44 @@
+.activityCard {
+  padding: 20px;
+  background-color: #f7f6f6;
+  width: auto;
+  border-radius: 5px;
+  display: grid;
+  grid-template-columns: 30px repeat(4, 1fr) 30px;
+  align-items: center;
+}
+.activityCardIcon {
+  grid-column-start: 1;
+  grid-column-end: 1;
+}
+.activityCardCallDetails {
+  grid-column-start: 2;
+  grid-column-end: 5;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.activityCardCallDetailsTo {
+  color: #4f4f4f;
+  font-weight: normal;
+}
+.activityCardCallDetailsTime {
+  color: #4f4f4f;
+  font-weight: lighter;
+  font-size: 9px;
+  grid-column-start: 5;
+  grid-column-end: 6;
+}
+.activityCardCallArchiveButton {
+  grid-column-start: 6;
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+}
+.activityCardCallArchiveButtonIcon:hover {
+  color: #4f4f4f;
+}
