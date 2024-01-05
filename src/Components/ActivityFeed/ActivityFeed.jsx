@@ -56,29 +56,56 @@ const ActivityFeed = ({ archives }) => {
     }
   };
 
+  const handleUnarchiveAll = async () => {
+    try {
+      setError(null);
+      await axios.patch(`https://cerulean-marlin-wig.cyclic.app/reset`);
+      // Refetch activities after successfully archiving an activity
+      fetchActivities();
+    } catch (error) {
+      setError("Error archiving activity");
+    }
+  };
+
   useEffect(() => {
     fetchActivities();
   }, []);
 
   return (
     <div className={styles.activityFeed}>
-      {loading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
-      {!loading &&
-        activities
-          .filter(
-            (activity) =>
-              (activity.to || activity.from || activity.via) &&
-              (archives ? activity.is_archived : !activity.is_archived)
-          )
-          .map((activity, index) => (
-            <ActivityCard
-              key={index}
-              activity={activity}
-              onArchive={() => handleArchive(activity.id)}
-              onUnarchive={() => handleUnarchive(activity.id)}
-            />
-          ))}
+      {!loading ? (
+        <div>
+          {archives && activities.filter((activity) => activity.is_archived).length > 0 && (
+            <div>
+              <button
+                className={styles.activityUnArchiveButton}
+                onClick={handleUnarchiveAll}
+              >
+                Unarchive All
+              </button>
+            </div>
+          )}
+          <div className={styles.activityCardsContainer}>
+            {activities
+              .filter(
+                (activity) =>
+                  (activity.to || activity.from || activity.via) &&
+                  (archives ? activity.is_archived : !activity.is_archived)
+              )
+              .map((activity, index) => (
+                <ActivityCard
+                  key={index}
+                  activity={activity}
+                  onArchive={() => handleArchive(activity.id)}
+                  onUnarchive={() => handleUnarchive(activity.id)}
+                />
+              ))}
+          </div>
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 };

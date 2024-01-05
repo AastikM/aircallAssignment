@@ -4,7 +4,7 @@
   width: auto;
   border-radius: 5px;
   display: grid;
-  grid-template-columns: 30px repeat(4, 1fr) 30px;
+  grid-template-columns: 30px repeat(6, 1fr) 30px;
   align-items: center;
 }
 .activityCardIcon {
@@ -13,7 +13,7 @@
 }
 .activityCardCallDetails {
   grid-column-start: 2;
-  grid-column-end: 5;
+  grid-column-end: 6;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -24,15 +24,27 @@
   color: #4f4f4f;
   font-weight: normal;
 }
-.activityCardCallDetailsTime {
-  color: #4f4f4f;
-  font-weight: lighter;
-  font-size: 9px;
-  grid-column-start: 5;
-  grid-column-end: 6;
+.activityCardCallDetailsWithTime {
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  .activityCardCallDetailsDuration {
+    color: #4f4f4f;
+    font-weight: lighter;
+    font-size: 9px;
+  }
+  .activityCardCallDetailsTime {
+    color: #4f4f4f;
+    font-weight: lighter;
+    font-size: 9px;
+    grid-column-start: 6;
+    grid-column-end: 8;
+    line-height: 12px;
+  }
 }
+
 .activityCardCallArchiveButton {
-  grid-column-start: 6;
+  grid-column-start: 8;
   display: flex;
   justify-content: flex-end;
   cursor: pointer;

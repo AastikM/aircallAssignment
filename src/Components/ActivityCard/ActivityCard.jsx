@@ -25,6 +25,17 @@ const ActivityCard = ({ activity, onArchive, onUnarchive }) => {
     }
   };
 
+  const formatDuration = (seconds) => {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const remainingSeconds = seconds % 60;
+
+    return `${String(hours).padStart(2, "0")}:${String(minutes).padStart(
+      2,
+      "0"
+    )}:${String(remainingSeconds).padStart(2, "0")}`;
+  };
+
   const formattedTime = format(new Date(activity?.created_at), "d MMM HH:mm");
 
   const handleArchive = async () => {
@@ -43,7 +54,7 @@ const ActivityCard = ({ activity, onArchive, onUnarchive }) => {
     } catch (error) {
       setError("Error archiving activity");
     }
-  }
+  };
 
   return (
     <>
@@ -59,14 +70,19 @@ const ActivityCard = ({ activity, onArchive, onUnarchive }) => {
             Tried calling on {activity?.to || activity?.via}
           </div>
         </div>
-        <div className={styles.activityCardCallDetailsTime}>
-          {formattedTime}
+        <div className={styles.activityCardCallDetailsWithTime}>
+          <div className={styles.activityCardCallDetailsDuration}>
+            <b>{formatDuration(activity?.duration)}</b>
+          </div>
+          <div className={styles.activityCardCallDetailsTime}>
+            {formattedTime}
+          </div>
         </div>
         <button className={styles.activityCardCallArchiveButton}>
           {activity?.is_archived ? (
-            <ArchiveRestore size={15} color="red" onClick={handleUnarchive} />
+            <ArchiveRestore size={18} color="red" onClick={handleUnarchive} />
           ) : (
-            <Archive size={15} color="green" onClick={handleArchive} />
+            <Archive size={18} color="green" onClick={handleArchive} />
           )}
         </button>
       </div>
